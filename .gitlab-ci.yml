@@ -1,0 +1,9 @@
+image: lorisleiva/laravel-docker:latest
+
+Production_Deploy:
+  before_script:
+    - apk add ruby ruby-dev ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler yarn ruby-rdoc >> /dev/null
+    - apk update
+    - gem install dpl >> /dev/null
+  script:
+    - dpl --provider=heroku --app=$HEROKU_PRODUCTION_PROJECT_NAME --api-key=$HEROKU_PRODUCTION_API_KEY
